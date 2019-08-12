@@ -1,0 +1,18 @@
+<paste log output from Kubernetes-mediated prediction, here>
+
+Exec command
+  $ make servicestart 
+    minikube service house-prediction
+🎉  Opening kubernetes service default/house-prediction in default browser...
+  $ miyaokakiyoshinari (master *) project-ml-microservice-kubernetes
+  $ ./make_prediction.sh 
+  Port: 80
+  {
+    "prediction": [
+      20.35373177134412
+    ]
+  }
+
+  I rewrite "./make_prediction.sh"
+  
+  http://localhost:$PORT/predict => http://192.168.99.102:32073/predict
