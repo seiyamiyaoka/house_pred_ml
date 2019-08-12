@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . app.py /app/
 ## Step 3:
 # Install packages from requirements.txt
-RUN pip install --upgrade &&\
+RUN pip install --upgrade && \
     pip install --trusted-host pypi.python.org -r requirements.txt
 #hadolint ignore=DL3013
 
