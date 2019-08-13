@@ -8,11 +8,11 @@ pipeline {
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     DOCKER_REGISTRY_ORG = 'seiyamiyaoka'
   }
-  stages('Lint Dockerfile') {
-      steps {
-        sh 'hadolint Dockerfile'
-      }
+  stage('Lint Dockerfile') {
+    steps {
+      sh 'hadolint Dockerfile'
     }
+  }
   stages {
     stage('CI Build and push snapshot') {
       when {
