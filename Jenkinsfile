@@ -8,11 +8,6 @@ pipeline {
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     DOCKER_REGISTRY_ORG = 'seiyamiyaoka'
   }
-  stage('Lint Dockerfile') {
-    steps {
-      sh 'hadolint Dockerfile'
-    }
-  }
   stages {
     stage('CI Build and push snapshot') {
       when {
@@ -25,6 +20,7 @@ pipeline {
       }
       steps {
         container('python') {
+          sh 'hadolint Dockerfile'
           sh "python -m unittest"
           sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
