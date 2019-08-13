@@ -1,48 +1,39 @@
-[![CircleCI](https://circleci.com/gh/seiyamiyaoka/kubenetes_house_prediction.svg?style=svg)](https://circleci.com/gh/seiyamiyaoka/kubenetes_house_prediction)
-
-### This Project
-
-This project is to run a web application using machine learning with kubenetes.
-
-### Installs
-
-* Create a virtualenv and activate it
-* Run `make install` to install the necessary dependencies
-* when you setup, need lint tool. please install [hadolint](https://github.com/hadolint/hadolint)
-
-### Running `app.py`
-
-1. Standalone:  `python app.py` if do not work this command, `python3.7 app.py`
-2. Run in Docker:  `./run_docker.sh`
-3. Run in Kubernetes:  `./run_kubernetes.sh`
-
-### Running Check
-
-```sh
-./make_prediction.sh
-```
-
-It is a success if the prediction is output like txt in the output directory.
-
-### Kubernetes Steps
-
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
-
-### introduction this Makefile
-
-circleci, kubernetes, minikube etc .. commands are so long.
-i write basic command to Makefile.
-
-- minikube-start => init minikube
-- check_kubenetes_deployment => confirm kubenetes deployments
-- minikubeboard => open minikube dashboard
-- servicestart => attach service on house-prediction cluster
-- validate-circleci => check circleci/config.yml
-- rub-circleci-local => execute circleci in local environment
+# udacity_capston_devops
 
 ### memo
-- sklearn downgrade(because does not working library)
-- docker command list https://docs.docker.com/engine/reference/commandline/docker/
+
+- jenkins x コンテナをデプロイする上で設定が楽
+- Blue/Green戦略 インスタンスは2つにする（bとg）, blueが稼働中でgreenがデプロイ用, 切り替える
+- rails, nginx, flask, mysql, redis
+- docker hubにimage保存
+- EKSでクラスタ管理
+- jenkins xを使ったblog https://aws.amazon.com/jp/blogs/opensource/continuous-delivery-eks-jenkins-x/
+- jx delete eks seiya-cloud 削除コマンド
+- serverless modeで作成するとUIはない
+
+
+### iam
+- eksとec2などを扱える権限が必要
+
+### 手順
+- cloudformationを使いubuntuでjenkins xを作成 => そもそもまちがっていた
+- macのdockerからkubenetesでどの環境でクラスターを扱うか設定, 
+- route53でhosted zoneを作成 https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/CreatingHostedZone.html
+- jxのeks作成後にはec2ができているのか => デフォルトでm5largeが2つ  
+- docker for macでkubenetesのバージョンが決まっているとしてアップデートをかけた
+- github上にstgとprod用のリポジトリができた
+
+### goal
+1
+- jenkinsx install and setting(github assoc etc)
+  - 
+- blue/green deployment environment settings
+2
+- in local env, create docker image(rails, flask(udacity house predict), db, redis)
+- docker image upload to docker hub
+3
+- in local env, kubenetes create cluster of minikube
+- eks test(not use pipeline)
+4
+- create jenkins file(Docker image lint, application lint, application test)
+- pipeline setting
