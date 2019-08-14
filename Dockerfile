@@ -1,4 +1,4 @@
-FROM python:3.7.3-stretch
+FROM python:3.7
 
 ## Step 1:
 # Create a working directory
@@ -10,7 +10,8 @@ COPY . app.py /app/
 ## Step 3:
 # Install packages from requirements.txt
 RUN python3.7 -m venv ~/.ml
-RUN pip3.7 install --upgrade pip
+RUN pip3.7 install --upgrade pip && \
+    pip3.7 install --trusted-host pypi.python.org -r requirements.txt
 #hadolint ignore=DL3013
 
 ## Step 4:
