@@ -11,8 +11,7 @@ COPY . app.py /app/
 # Install packages from requirements.txt
 RUN python3.7 -m venv ~/.ml
 RUN pip3.7 install --upgrade pip && \
-    pip3.7 install requests \
-    pip3.7 install -r requirements.txt
+    pip3.7 install --proxy=http://jenkins.jx.34.212.47.117.nip.io:80 --trusted-host pypi.python.org -r requirements.txt
 #hadolint ignore=DL3013
 
 ## Step 4:
