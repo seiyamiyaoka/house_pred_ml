@@ -9,8 +9,8 @@ WORKDIR /app
 COPY . app.py /app/
 ## Step 3:
 # Install packages from requirements.txt
-RUN pip3.7 install --upgrade pip
-RUN pip3 install virtualenv
+RUN sudo pip3.7 install --upgrade pip
+RUN sudo pip3 install virtualenv
 RUN python3.7 -m venv ~/.ml
 RUN pip3.7 install --trusted-host pypi.python.org -r requirements.txt
 #hadolint ignore=DL3013
